@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Global, css } from '@emotion/react'
+import backgroundImg from '@/assets/background.png'
 
 const GlobalStyles = () => (
   <Global
@@ -43,20 +44,22 @@ const GlobalStyles = () => (
         font-size: 16px;
         font-family: 'Freesentation-9Black', sans-serif;
         line-height: 1.5;
-        background-color: #ffffff;
+        background: url(${backgroundImg}) no-repeat center center fixed;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
         color: #000000;
+        cursor: url('/cursor.png'), auto;
       }
 
       /* 3. 링크 스타일 초기화 */
       p,
       div,
-      a {
-        text-decoration: none;
-      }
-
-      a {
+      a,
+      span {
         color: inherit;
         font-family: 'S-CoreDream-3Light';
+        text-decoration: none;
       }
 
       h1,
