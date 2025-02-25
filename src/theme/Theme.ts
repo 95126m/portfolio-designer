@@ -1,13 +1,19 @@
 export const color = {
-  background: '#1e1e1e',
-  white: '#fff',
+  whiteGray: '#CCCCCC',
+  lightGray: '#7C7C7C',
   gray: '#393939',
   darkgray: '#111',
   black: '#000',
-  orange: '#ff9500'
+  white: '#fff',
+  whiteOrange: '#FFE9D0',
+  lightOrange: '#FFD09A',
+  middleOrange: '#FFB056',
+  orange: '#ff9500',
+  green: '#2FB261'
 }
 
 export const fontSize = {
+  xxxxxs: '14px',
   xxxxs: '16px',
   xxxs: '20px',
   xxs: '24px',
@@ -16,8 +22,8 @@ export const fontSize = {
   md: '40px',
   lg: '48px',
   xl: '60px',
-  xxl: '64px',
-  xxxl: '86px'
+  xxl: '80px',
+  xxxl: '100px'
 }
 
 export const fontWeight = {

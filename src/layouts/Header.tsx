@@ -1,25 +1,40 @@
-/** @jsxImportSource @emotion/react */
-import { css } from '@emotion/react'
-import { Link } from 'react-router-dom'
+import { css, keyframes } from '@emotion/react'
+import { useState } from 'react'
 import { color, fontSize } from '@/theme/Theme'
-import Logo from '@/assets/logo.png'
+import Logo from '@/assets/logo4.png'
+import Logo2 from '@/assets/logo6.png'
+import MenuIcon from '@mui/icons-material/Menu'
+import Menu from '@/components/Menu'
 
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false)
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   return (
     <div css={wrapperStyle}>
-      <Link
-        to="/"
-        onClick={scrollToTop}>
+      <a
+        href="#home"
+        onClick={scrollToTop} css={imgWrapperStyle}>
         <img
           src={Logo}
           alt="Logo"
-          css={{ height: '26px', paddingLeft: '20px', cursor: 'pointer' }}
+          css={logoStyle}
         />
-      </Link>
+        <img
+          src={Logo2}
+          alt="Logo"
+          css={logoStyle2}
+        />
+      </a>
+
+      <MenuIcon
+        css={menuIconStyle}
+        onClick={() => setIsMenuOpen(true)}
+      />
+
+      {isMenuOpen && <Menu onClose={() => setIsMenuOpen(false)} />}
     </div>
   )
 }
@@ -28,11 +43,9 @@ export default Header
 
 const wrapperStyle = css`
   width: 100%;
-  height: 70px;
+  height: 100px;
   margin: 0 auto;
-  padding: 0 130px;
-  background-color: ${color.white};
-  border-bottom: 1px solid ${color.gray};
+  padding: 0 100px;
   display: flex;
   position: fixed;
   align-items: center;
@@ -51,9 +64,38 @@ const wrapperStyle = css`
     gap: 10px;
     margin-right: 20px;
     color: ${color.black};
-
-    &:hover {
-      cursor: pointer;
-    }
+    cursor: pointer;
   }
+`
+
+const rotateAnimation = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`
+
+const imgWrapperStyle = css`
+  display: flex;
+  align-items: center;
+`
+
+const logoStyle = css`
+  height: 30px;
+`
+
+const logoStyle2 = css`
+  height: 30px;
+
+  &:hover {
+    animation: ${rotateAnimation} 2s linear infinite;
+  }
+`
+
+const menuIconStyle = css`
+  cursor: pointer;
+  color: ${color.black};
+  font-size: 40px;
 `
