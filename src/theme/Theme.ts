@@ -4,11 +4,16 @@ export const color = {
   gray: '#393939',
   darkgray: '#111',
   black: '#000',
+  opacity10: 'rgba(0, 0, 0, 0.1)',
+  opacity30: 'rgba(0, 0, 0, 0.3)',
+  opacity50: 'rgba(0, 0, 0, 0.5)',
+  opacity80: 'rgba(0, 0, 0, 0.8)',
   white: '#fff',
   whiteOrange: '#FFE9D0',
   lightOrange: '#FFD09A',
   middleOrange: '#FFB056',
   orange: '#ff9500',
+  orangeOpacity50: 'rgba(255, 149, 0, 0.5)',
   green: '#2FB261'
 }
 

@@ -438,7 +438,7 @@ const Works: React.FC = () => {
           </p>
         </div>
         <div className="text">
-          <h1>BAPEBOOK</h1>
+          <h1>VAPEBOOK</h1>
           <span>
             전자담배 도매 업체 로고 디자인입니다.
             <br />
