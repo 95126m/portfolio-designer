@@ -6,12 +6,24 @@ import CloseIcon from '@mui/icons-material/Close'
 interface MenuProps {
   onClose: () => void
 }
-const Modal: React.FC<MenuProps> = ({ onClose }) => {
+const Menu: React.FC<MenuProps> = ({ onClose }) => {
   const [isMenuClose, setIsMenuClose] = useState<boolean>(false)
+
+  const scrollToSection = (
+    id: string,
+    event: React.MouseEvent<HTMLAnchorElement>
+  ) => {
+    event.preventDefault()
+    const section = document.getElementById(id)
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' })
+      handleCloseMenu()
+    }
+  }
 
   const handleCloseMenu = () => {
     setIsMenuClose(true)
-    setTimeout(onClose, 500)
+    onClose()
   }
 
   return (
@@ -29,13 +41,19 @@ const Modal: React.FC<MenuProps> = ({ onClose }) => {
           <p>95126m@gmail.com</p>
         </div>
         <div css={linkWrapper}>
-          <a href="">
+          <a
+            href="#home"
+            onClick={e => scrollToSection('home', e)}>
             <h1>HOME</h1>
           </a>
-          <a href="">
+          <a
+            href="#works"
+            onClick={e => scrollToSection('works', e)}>
             <h1>WORKS</h1>
           </a>
-          <a href="">
+          <a
+            href="#overview"
+            onClick={e => scrollToSection('overview', e)}>
             <h1>OVERVIEW</h1>
           </a>
         </div>
@@ -53,7 +71,7 @@ const Modal: React.FC<MenuProps> = ({ onClose }) => {
   )
 }
 
-export default Modal
+export default Menu
 
 const wrapperStyle = css`
   position: fixed;
