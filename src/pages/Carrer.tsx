@@ -17,6 +17,45 @@ const Carrer = () => {
 
       <div className="right-sections">
         <motion.div
+          className="first-section"
+          initial={{ opacity: 0, y: 100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          transition={{ duration: 0.5, delay: 0.4, ease: 'easeInOut' }}>
+          <h1>㈜ 일신산업</h1>
+          <p>
+            2030 여성 타깃의 패션 브랜드에서 매니시 & 페미닌 스타일 중심의
+            이미지 제작을 담당하였습니다.
+            <br />
+            웹디자인 전반은 물론, SNS 광고 콘텐츠 제작과 플랫폼 기획전 운영까지
+            맡아 진행하였습니다.
+            <br />
+            또한 경리 업무도 병행하며 지출결의서 작성, 증빙 정리, 전표 입력 등의
+            실무를 수행했고, ERP 시스템을 활용해 비용 정산 및 회계 처리를
+            체계적으로 관리하였습니다.
+          </p>
+          <div css={tagWrapperStyle}>
+            <div css={tagStyle}>
+              <span>개인 사정으로 인한 퇴사</span>
+            </div>
+            <div css={tagStyle}>
+              <span>2025.01 - 2025.05</span>
+            </div>
+            <div css={tagStyle}>
+              <span>웹디자이너</span>
+            </div>
+            <div css={tagStyle}>
+              <a
+                href="https://muarvo.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                css={linkTagStyle}>
+                <span>사이트 보기</span>
+              </a>
+            </div>
+          </div>
+        </motion.div>
+        <motion.div
           className="who-section"
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -177,12 +216,12 @@ const wrapperStyle = css`
 
   .right-sections {
     width: 75%;
-    height: 100vh;
+    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-
+  .first-section,
   .who-section,
   .vision-section,
   .perseverance-section {
@@ -193,6 +232,21 @@ const wrapperStyle = css`
     justify-content: center;
     align-items: flex-start;
     padding: 40px 80px;
+  }
+
+  .first-section {
+    border-bottom: 1px solid ${color.whiteGray};
+    h1 {
+      font-size: ${fontSize.sm};
+      color: ${color.black};
+    }
+
+    p {
+      font-size: ${fontSize.xxxxs};
+      color: ${color.black};
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
   }
 
   .who-section {
