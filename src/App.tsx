@@ -8,6 +8,7 @@ import GlobalStyles from '@/theme/GlobalStyles'
 import Header from '@/layouts/Header'
 import Home from '@/pages/Home'
 import Works from '@/pages/Works'
+import PopUp from '@/pages/PopUp'
 import Overview from '@/pages/Overview'
 import About from '@/pages/About'
 import Carrer from '@/pages/Carrer'
@@ -34,6 +35,9 @@ function AppContent() {
               </section>
               <section id="works">
                 <Works />
+              </section>
+              <section id="popup">
+                <PopUp />
               </section>
               <section id="overview">
                 <Overview />

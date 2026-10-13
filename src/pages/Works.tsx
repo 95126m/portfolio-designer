@@ -3,70 +3,97 @@ import { css } from '@emotion/react'
 import { color, fontSize } from '@/theme/Theme'
 import { motion } from 'framer-motion'
 import Modal from '@/components/Modal'
-
 import chopImg1 from '@/assets/works/work1-chop1.jpg'
 import chopImg2 from '@/assets/works/work1-chop2.jpg'
-
 import coutoImg1 from '@/assets/works/work2-couto1.jpg'
 import coutoImg2 from '@/assets/works/work2-couto2.jpg'
-
 import keonImg1 from '@/assets/works/work3-keon1.jpg'
 import keonImg2 from '@/assets/works/work3-keon2.jpg'
-
+import basikaImg1 from '@/assets/works/work13-basika1.jpg'
+import basikaImg2 from '@/assets/works/work13-basika2.jpg'
 import nnImg1 from '@/assets/works/work4-nn1.jpg'
 import nnImg2 from '@/assets/works/work4-nn2.jpg'
-
 import vasticImg1 from '@/assets/works/work5-vastic1.jpg'
 import vasticImg2 from '@/assets/works/work5-vastic2.jpg'
-
 import widelineImg1 from '@/assets/works/work6-wideline1.jpg'
 import widelineImg2 from '@/assets/works/work6-wideline2.jpg'
-
 import busanImg1 from '@/assets/works/work7-busan1.jpg'
 import hongsamImg1 from '@/assets/works/work8-hongsam1.jpg'
-
 import beeImg1 from '@/assets/works/work9-bee1.jpg'
 import beeImg2 from '@/assets/works/work9-bee2.jpg'
-
 import bapeImg1 from '@/assets/works/work10-bape1.jpg'
 import palettImg1 from '@/assets/works/work11-palett1.jpg'
 import dogImg1 from '@/assets/works/work12-dog1.jpg'
-
+import scolpio1 from '@/assets/works/work14-scolpio1.png'
+import scolpio2 from '@/assets/works/work14-scolpio2.png'
+import scolpio3 from '@/assets/works/work14-scolpio3.jpg'
 const Works: React.FC = () => {
+  const [activeFilter, setActiveFilter] = useState('전체')
+  const [showAll, setShowAll] = useState(false)
+  const workCategories = [
+    '상세페이지', // 0 CHOP CHOP BEAUTE
+    '상세페이지', // 1 COUTO
+    '상세페이지', // 2 깨온
+    '상세페이지', // 3 Nick & Nicole
+    '상세페이지', // 4 BASIKA
+    '상세페이지', // 5 VASTIC
+    '리플렛',     // 6 와이드라인
+    '포스터',     // 7 부산 국제 단편 영화제
+    '패키지',     // 8 STORE 3355
+    '패키지',     // 9 배문성 벌꿀
+    '로고',       // 10 SCOLPIO
+    '로고',       // 11 VAPEBOOK
+    '로고',       // 12 일상팔레트
+    '로고',       // 13 Have a dog day
+  ] as const
+  const visibleWorkIndices = workCategories.reduce<number[]>((indices, category, index) => {
+    if (activeFilter === '전체' || activeFilter === category) indices.push(index)
+    return indices
+  }, [])
+  const showMoreButton = visibleWorkIndices.length > 6
+  const filters = ['전체', '상세페이지', '리플렛', '포스터', '패키지', '로고'] as const
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [modalImage, setModalImage] = useState<string[] | null>(null) 
-
+  const [modalImage, setModalImage] = useState<string[] | null>(null)
   const openModal = (image: string | string[], index: number) => {
-    setModalImage(Array.isArray(image) ? image : [image]) 
+    setModalImage(Array.isArray(image) ? image : [image])
     setCurrentIndex(index)
     setIsModalOpen(true)
   }
-
   const closeModal = () => {
     setIsModalOpen(false)
     setModalImage(null)
   }
-
   const prevImage = () => {
     if (!modalImage) return
     setCurrentIndex(prev => (prev === 0 ? modalImage.length - 1 : prev - 1))
   }
-
   const nextImage = () => {
     if (!modalImage) return
     setCurrentIndex(prev => (prev === modalImage.length - 1 ? 0 : prev + 1))
   }
-
   return (
     <div css={wrapperStyle}>
       <div css={titleStyle}>
         <div></div>
         <span>WORKS</span>
       </div>
-
+      <nav css={filterStyle} aria-label="작업물 카테고리 필터">
+        {filters.map(filter => (
+          <button
+            key={filter}
+            type="button"
+            aria-pressed={activeFilter === filter}
+            className={activeFilter === filter ? 'active' : ''}
+            onClick={() => { setActiveFilter(filter); setShowAll(false) }}
+          >
+            {filter}
+          </button>
+        ))}
+      </nav>
+      {(visibleWorkIndices.includes(0) && (showAll || visibleWorkIndices.indexOf(0) < 6)) && (
       <motion.div
-        className="first-section"
+        className={`work-section first-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(0) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -103,9 +130,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
-
+      )}
+      {(visibleWorkIndices.includes(1) && (showAll || visibleWorkIndices.indexOf(1) < 6)) && (
       <motion.div
-        className="second-section"
+        className={`work-section second-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(1) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -143,8 +171,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+      {(visibleWorkIndices.includes(2) && (showAll || visibleWorkIndices.indexOf(2) < 6)) && (
       <motion.div
-        className="third-section"
+        className={`work-section third-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(2) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -180,8 +210,49 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+            {(visibleWorkIndices.includes(4) && (showAll || visibleWorkIndices.indexOf(4) < 6)) && (
       <motion.div
-        className="fourth-section"
+        className={`work-section fourth-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(4) === 5 ? " preview-fade" : ""}`}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: 'easeInOut' }}>
+        <div className="type-title">
+          <p>
+            상세페이지
+            <br />
+            디자인
+          </p>
+        </div>
+        <div className="text">
+          <h1>BASIKA</h1>
+          <span>
+            브랜드 바시카는 페미닌한 무드를 지향합니다.
+            <br />
+            상세페이지는 보정된 이미지를 중심으로 구성하며, 소비자가 지루함을 느끼지 않도록
+            <br />
+            확대컷, 전신컷, 아이템 디테일 컷을 적절히 배치해 시각적인 리듬감을 생각하며 디자인하였습니다.
+          </span>
+          <div className="text2">
+            <p>기여도</p>
+            <h2>본인 100%</h2>
+            <p>사용 프로그램</p>
+            <h2>Photoshop / Illustrator</h2>
+          </div>
+        </div>
+        <div className="image">
+          <img
+            src={basikaImg1}
+            alt=""
+            onClick={() => openModal(basikaImg2, 0)}
+          />
+        </div>
+      </motion.div>
+      )}
+      {(visibleWorkIndices.includes(3) && (showAll || visibleWorkIndices.indexOf(3) < 6)) && (
+      <motion.div
+        className={`work-section fourth-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(3) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -196,11 +267,13 @@ const Works: React.FC = () => {
         <div className="text">
           <h1>Nick & Nicole</h1>
           <span>
-            모던 페미닌 여성 의류 상세페이지, 베너, 팝업 이미지 디자인
-            디자인입니다.
-            <br />
-            시즌마다 트렌디하도록 디자인하되 닉앤니콜의 메인 무드를 헤치지않도록
-            디자인 진행하였습니다.
+          브랜드 닉앤니콜은 캐주얼하고 모던한 무드를 지향합니다.
+          <br />
+          해외 패션 트렌드를 리서치하여 시즌별 감도에 맞춰 디자인하며,
+          의상의 주요 디테일을 상단에 배치해 가독성을 높였습니다.
+          <br />
+          자연스러운 모델 보정과 부드러운 포징의 이미지를 활용하여
+          감각적이고 조화로운 상세페이지를 구성하였습니다.
           </span>
           <div className="text2">
             <p>기여도</p>
@@ -217,8 +290,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+      {(visibleWorkIndices.includes(5) && (showAll || visibleWorkIndices.indexOf(5) < 6)) && (
       <motion.div
-        className="fifth-section"
+        className={`work-section fifth-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(5) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -233,18 +308,13 @@ const Works: React.FC = () => {
         <div className="text">
           <h1>VASTIC</h1>
           <span>
-            유니섹스 의류 브랜드 상세페이지, 베너, 팝업 이미지 디자인 입니다.
-            <br />
-            브랜드 ‘vastic’ 의 홈페이지 스타일은 심플하고 깔끔한 느낌으로 주로
-            디자인을 진행하였습니다.
-            <br />
-            패턴이 많이 들어가지 않는 디테일이 주를 이루는 의류들만 이루어져
-            있기 때문에 최대한
-            <br />
-            패션 스타일과 어우러질 수 있고 의상이 돋보이도록 사이트 메인 컬러와
-            서브 컬러는
-            <br />
-            화이트, 라이트 그레이 같이 차분한 컬러로 디자인을 하였습니다.
+          브랜드 바스틱은 심플하고 미니멀한 무드를 지향합니다.
+          <br />
+          절제된 디자인과 섬세한 디테일이 돋보이는 의류의 특성을 고려하여,
+          제품 본연의 매력이 강조되도록 디자인하였습니다.
+          <br />
+          화이트와 라이트 그레이 등 차분한 컬러를 중심으로
+          깔끔하고 조화로운 홈페이지를 구성하였습니다.
           </span>
           <div className="text2">
             <p>기여도</p>
@@ -261,8 +331,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+      {(visibleWorkIndices.includes(6) && (showAll || visibleWorkIndices.indexOf(6) < 6)) && (
       <motion.div
-        className="sixth-section"
+        className={`work-section sixth-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(6) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -302,8 +374,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+      {(visibleWorkIndices.includes(7) && (showAll || visibleWorkIndices.indexOf(7) < 6)) && (
       <motion.div
-        className="seventh-section"
+        className={`work-section seventh-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(7) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -342,8 +416,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+      {(visibleWorkIndices.includes(8) && (showAll || visibleWorkIndices.indexOf(8) < 6)) && (
       <motion.div
-        className="eightth-section"
+        className={`work-section eightth-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(8) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -382,8 +458,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+      {(visibleWorkIndices.includes(9) && (showAll || visibleWorkIndices.indexOf(9) < 6)) && (
       <motion.div
-        className="nineth-section"
+        className={`work-section nineth-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(9) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -424,8 +502,51 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+      {(visibleWorkIndices.includes(10) && (showAll || visibleWorkIndices.indexOf(10) < 6)) && (
       <motion.div
-        className="tenth-section"
+        className={`work-section scolpio-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(10) === 5 ? " preview-fade" : ""}`}
+        initial={{ opacity: 0, y: 100 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 0.8, delay: 0.1, ease: 'easeInOut' }}>
+        <div className="type-title">
+          <p>
+            로고
+            <br />
+            디자인
+          </p>
+        </div>
+        <div className="text">
+          <h1>SCOLPIO</h1>
+          <span>
+            브랜드 스콜피오 로고 디자인입니다.
+            <br />
+            SCOLPIO의 이니셜 ‘S’와 전갈의 날카롭고 역동적인 형상을 결합한 심볼 로고입니다. 
+            <br />
+            유려한 곡선과 강렬한 직선의 조화를 통해 전갈이 지닌 민첩함과 강인함을 표현했으며, 
+            <br />
+            메탈릭한 질감으로 브랜드의 세련되고 프리미엄한 이미지를 강조했습니다.
+          </span>
+          <div className="text2">
+            <p>기여도</p>
+            <h2>본인 100%</h2>
+            <p>사용 프로그램</p>
+            <h2>Illustrator</h2>
+          </div>
+        </div>
+        <div className="image">
+          <img
+            src={scolpio1}
+            alt=""
+            onClick={() => openModal([scolpio1, scolpio2, scolpio3], 0)}
+          />
+        </div>
+      </motion.div>
+      )}
+{(visibleWorkIndices.includes(11) && (showAll || visibleWorkIndices.indexOf(11) < 6)) && (
+      <motion.div
+        className={`work-section tenth-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(11) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -465,8 +586,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+{(visibleWorkIndices.includes(12) && (showAll || visibleWorkIndices.indexOf(12) < 6)) && (
       <motion.div
-        className="eleventh-section"
+        className={`work-section eleventh-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(12) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -505,8 +628,10 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
+      )}
+{(visibleWorkIndices.includes(13) && (showAll || visibleWorkIndices.indexOf(13) < 6)) && (
       <motion.div
-        className="twelveth-section"
+        className={`work-section twelveth-section${showMoreButton && !showAll && visibleWorkIndices.indexOf(13) === 5 ? " preview-fade" : ""}`}
         initial={{ opacity: 0, y: 100 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
@@ -546,125 +671,214 @@ const Works: React.FC = () => {
           />
         </div>
       </motion.div>
-
+      )}
+{showMoreButton && (
+        <button
+          type="button"
+          css={moreButtonStyle}
+          onClick={() => setShowAll(prev => !prev)}
+          aria-expanded={showAll}
+        >
+          {showAll ? 'CLOSE' : 'MORE'}
+        </button>
+      )}
       {isModalOpen && modalImage && (
         <Modal
-          images={modalImage} 
+          images={modalImage}
           currentIndex={currentIndex}
           onClose={closeModal}
           onPrev={prevImage}
-          onNext={nextImage} 
+          onNext={nextImage}
         />
       )}
     </div>
   )
 }
-
 export default Works
-
 const wrapperStyle = css`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   width: 100%;
-  height: 100%;
-  flex-direction: column;
-
-  .first-section,
-  .second-section,
-  .third-section,
-  .fourth-section,
-  .fifth-section,
-  .sixth-section,
-  .seventh-section,
-  .eightth-section,
-  .nineth-section,
-  .tenth-section,
-  .eleventh-section,
-  .twelveth-section {
+  min-width: 0;
+  & > [class*="-section"] {
     display: flex;
     align-items: center;
     width: 88%;
+    max-width: 1500px;
+    gap: 24px;
+    padding: 40px 0;
     border-top: 1px solid ${color.black};
-    padding-top: 40px;
-    padding-bottom: 40px;
     background-color: rgba(255, 255, 255, 0.2);
-
+    box-sizing: border-box;
     .type-title {
       display: flex;
       justify-content: center;
       align-items: center;
       width: 200px;
-      height: 100%;
+      flex: 0 0 200px;
       text-align: center;
       color: ${color.orange};
-
       p {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        width: 100%;
-        height: 100%;
+        margin: 0;
         font-size: ${fontSize.xxxxs};
       }
     }
-
     .text {
       display: flex;
+      flex: 1 1 0;
+      min-width: 0;
       flex-direction: column;
       gap: 20px;
-
       h1 {
+        margin: 0;
         color: ${color.black};
         font-size: ${fontSize.xl};
+        overflow-wrap: anywhere;
       }
-
-      span {
+      > span {
         color: ${color.gray};
         font-size: ${fontSize.xxxxs};
+        line-height: 1.8;
+        overflow-wrap: anywhere;
       }
-
       .text2 {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-
-        p {
-          color: ${color.gray};
-          font-size: ${fontSize.xxxxs};
-          margin-top: 10px;
-        }
+        display: grid;
+        grid-template-columns: max-content minmax(0, 1fr);
+        align-items: start;
+        gap: 10px 12px;
+        p,
         h2 {
-          color: ${color.black};
+          margin: 0;
           font-size: ${fontSize.xxxxs};
-          margin-top: 10px;
-          margin-bottom: 20px;
+          line-height: 1.6;
         }
+        p { color: ${color.gray}; }
+        h2 { color: ${color.black}; overflow-wrap: anywhere; }
       }
     }
-
     .image {
       width: 350px;
       height: 300px;
+      flex: 0 0 350px;
       overflow: hidden;
-      background-size: cover;
-      background-position: center;
       cursor: pointer;
       filter: brightness(70%);
-      will-change: transform, filter;
-      transition: all 0.5s ease-in-out;
+      transition: filter 0.5s ease-in-out, transform 0.5s ease-in-out;
       margin-left: auto;
       margin-right: 40px;
-
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
       &:hover {
         filter: brightness(100%);
         transform: scale(1.05);
       }
     }
   }
+  /\\* 접힌 상태에서 마지막 작품의 카테고리, 텍스트, 이미지 전체를 같은 그라데이션으로 처리 \\*/
+  & > .preview-fade {
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+  }
+  @media (max-width: 1024px) {
+    & > [class*="-section"] {
+      width: 92%;
+      gap: 20px;
+      padding: 35px 0;
+      .type-title { width: 110px; flex-basis: 110px; }
+      .text h1 { font-size: 24px; }
+      .image {
+        width: 280px;
+        height: 240px;
+        flex-basis: 280px;
+        margin-right: 0;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    & > [class*="-section"] {
+      width: calc(100% - 32px);
+      max-width: 100%;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: stretch !important;
+      gap: 20px;
+      padding: 35px 0;
+      .type-title {
+        order: 1;
+        width: 100%;
+        flex: none;
+        justify-content: flex-start;
+        text-align: left;
+        p {
+          flex-direction: row;
+          justify-content: flex-start;
+          gap: 5px;
+          font-size: 13px;
+          br { display: none; }
+        }
+      }
+      .text {
+        order: 2;
+        width: 100%;
+        flex: none;
+        gap: 14px;
+        h1 { font-size: 24px; line-height: 1.3; }
+        > span {
+          font-size: 13px;
+          line-height: 1.8;
+          br { display: none; }
+        }
+        .text2 {
+          gap: 10px 16px;
+          p, h2 { font-size: 12px; }
+        }
+      }
+      .image {
+        /\\* 모바일에서만 좌우 여백 없이 화면 너비 전체 사용 \\*/
+        display: block;
+        order: 3;
+        align-self: flex-start;
+        width: 100vw;
+        max-width: none;
+        height: auto;
+        aspect-ratio: auto;
+        flex: none;
+        margin: 0;
+        margin-left: calc((100% - 100vw) / 2);
+        overflow: hidden;
+        filter: brightness(100%);
+        img {
+          display: block;
+          width: 100%;
+          height: auto;
+          object-fit: contain;
+        }
+        &:hover { transform: none; }
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    & > [class*="-section"] {
+      padding: 28px 0;
+      .text {
+        h1 { font-size: 21px; }
+        > span { font-size: 12px; }
+      }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    & > [class*="-section"] .image { transition: none; }
+  }
 `
-
 const titleStyle = css`
   display: flex;
   flex-direction: column;
@@ -672,16 +886,89 @@ const titleStyle = css`
   justify-content: center;
   height: 450px;
   gap: 40px;
-
   div {
     width: 1px;
     height: 200px;
     background-color: ${color.black};
   }
-
   span {
     font-size: ${fontSize.sm};
     color: ${color.black};
     margin-bottom: 60px;
+  }
+  @media (max-width: 768px) {
+    height: 280px;
+    gap: 25px;
+    div { height: 120px; }
+    span { font-size: 20px; margin-bottom: 30px; }
+  }
+  @media (max-width: 480px) {
+    height: 220px;
+    div { height: 90px; }
+    span { font-size: 18px; margin-bottom: 20px; }
+  }
+`
+const filterStyle = css`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 88%;
+  max-width: 1500px;
+  margin: 0 auto 36px;
+  button {
+    appearance: none;
+    cursor: pointer;
+    border: 1px solid ${color.black};
+    border-radius: 999px;
+    background: transparent;
+    color: ${color.black};
+    padding: 10px 19px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    &:hover, &.active {
+      background: ${color.black};
+      color: #fff;
+    }
+    &:focus-visible {
+      outline: 2px solid ${color.orange};
+      outline-offset: 3px;
+    }
+  }
+  @media (max-width: 768px) {
+    width: 90%;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-bottom: 24px;
+    button {
+      font-size: 12px;
+      padding: 9px 14px;
+    }
+  }
+`
+const moreButtonStyle = css`
+  display: block;
+  width: fit-content;
+  margin: 22px auto 70px;
+  padding: 12px 20px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: ${color.lightGray};
+  font-size: 13px;
+  font-weight: 100;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  &:hover { opacity: 0.55; }
+  &:focus-visible {
+    outline: 2px solid ${color.orange};
+    outline-offset: 3px;
+  }
+  @media (max-width: 768px) {
+    margin: 20px auto 50px;
+    font-size: 14px;
   }
 `

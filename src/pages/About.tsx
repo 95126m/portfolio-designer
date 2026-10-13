@@ -9,8 +9,9 @@ const About = () => {
         className="left-section"
         initial={{ opacity: 0, x: -100 }}
         whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: false, amount: 0.5 }}
-        transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}>
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.5, delay: 0.1, ease: 'easeInOut' }}
+      >
         <p>OVERVIEW</p>
         <h1>ABOUT</h1>
       </motion.div>
@@ -18,10 +19,11 @@ const About = () => {
       <div className="right-sections">
         <motion.div
           className="who-section"
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.4, ease: 'easeInOut' }}>
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.2, ease: 'easeInOut' }}
+        >
           <h1>WHO</h1>
           <p>
             조화롭게 스며드는 디자이너, 김영은입니다.
@@ -35,12 +37,14 @@ const About = () => {
             나가겠습니다.
           </p>
         </motion.div>
+
         <motion.div
           className="vision-section"
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.6, ease: 'easeInOut' }}>
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.3, ease: 'easeInOut' }}
+        >
           <h1>VISION</h1>
           <p>
             새로운 트렌드와 기술에 대한 높은 탐구심을 바탕으로, 직관적이고
@@ -57,20 +61,22 @@ const About = () => {
             성장해, 더욱 가치 있는 디자인을 선보이고 싶습니다.
           </p>
         </motion.div>
+
         <motion.div
           className="perseverance-section"
-          initial={{ opacity: 0, y: 100 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.5 }}
-          transition={{ duration: 0.5, delay: 0.8, ease: 'easeInOut' }}>
+          viewport={{ once: false, amount: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.4, ease: 'easeInOut' }}
+        >
           <h1>PERSEVERANCE</h1>
           <p>
             부족함을 느끼면 좌절하지 않고 극복하기 위해 노력합니다.
             <br />
             해외에서 학창 시절을 보내며 미술 실력이 부족하다고 느꼈고, 이를
             보완하기 위해 매 방학마다 디자인 학원을 다니며 실력을 키웠습니다.
-            <br />그 결과, 3학년부터는 패션쇼에서도 인정받으며 성장할 수
-            있었습니다.
+            <br />
+            그 결과, 3학년부터는 패션쇼에서도 인정받으며 성장할 수 있었습니다.
             <br />
             업무에서도 같은 자세로 임하며, 배움을 통해 역량을 키우고, 타인에게
             긍정적인 영향을 주는 사람이 되겠습니다.
@@ -86,87 +92,173 @@ export default About
 const wrapperStyle = css`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   align-items: stretch;
   width: 100%;
   min-height: 100vh;
+  box-sizing: border-box;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
 
   .left-section {
     width: 25%;
+    min-width: 0;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: ${color.opacity80};
-    padding: 50px;
+    padding: 50px 24px;
+    text-align: center;
+
     p {
       font-size: ${fontSize.xxxxxs};
       color: ${color.orange};
     }
+
     h1 {
       font-size: ${fontSize.xl};
       color: ${color.white};
+      overflow-wrap: anywhere;
     }
   }
 
   .right-sections {
     width: 75%;
-    height: 100vh;
+    min-width: 0;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
   }
 
   .who-section,
   .vision-section,
   .perseverance-section {
     width: 100%;
-    flex-grow: 1;
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     padding: 40px 80px;
-  }
 
-  .who-section {
-    border-bottom: 1px solid ${color.whiteGray};
     h1 {
       font-size: ${fontSize.md};
       color: ${color.black};
+      overflow-wrap: anywhere;
     }
 
     p {
       font-size: ${fontSize.xxxxs};
       color: ${color.black};
       margin-top: 10px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
     }
   }
 
+  .who-section,
   .vision-section {
     border-bottom: 1px solid ${color.whiteGray};
-    h1 {
-      font-size: ${fontSize.md};
-      color: ${color.black};
+  }
+
+  /* 태블릿 */
+  @media (max-width: 1024px) {
+    .left-section {
+      width: 30%;
+      padding: 36px 20px;
+
+      h1 {
+        font-size: clamp(28px, 4vw, 44px);
+      }
     }
 
-    p {
-      font-size: ${fontSize.xxxxs};
-      color: ${color.black};
-      margin-top: 10px;
+    .right-sections {
+      width: 70%;
+    }
+
+    .who-section,
+    .vision-section,
+    .perseverance-section {
+      padding: 40px 36px;
     }
   }
-  .perseverance-section {
-    h1 {
-      font-size: ${fontSize.md};
-      color: ${color.black};
+
+  /* 모바일: ABOUT 제목 위, 설명 아래 */
+  @media (max-width: 768px) {
+    flex-direction: column;
+    min-height: 100vh;
+
+    .left-section {
+      width: 100%;
+      min-height: 230px;
+      padding: 65px 20px 45px;
+      gap: 8px;
+
+      p {
+        font-size: 12px;
+      }
+
+      h1 {
+        font-size: clamp(34px, 9vw, 48px);
+        line-height: 1.15;
+      }
     }
 
-    p {
-      font-size: ${fontSize.xxxxs};
-      color: ${color.black};
-      margin-top: 10px;
+    .right-sections {
+      width: 100%;
+      min-height: 0;
+      height: auto;
+    }
+
+    .who-section,
+    .vision-section,
+    .perseverance-section {
+      flex: none;
+      padding: 42px 6%;
+      justify-content: flex-start;
+
+      h1 {
+        font-size: 25px;
+      }
+
+      p {
+        font-size: 14px;
+        line-height: 1.9;
+        margin-top: 16px;
+        word-break: keep-all;
+
+        br {
+          display: none;
+        }
+      }
+    }
+  }
+
+  /* 작은 스마트폰 */
+  @media (max-width: 480px) {
+    .left-section {
+      min-height: 200px;
+      padding: 55px 16px 35px;
+    }
+
+    .who-section,
+    .vision-section,
+    .perseverance-section {
+      padding: 34px 20px;
+
+      h1 {
+        font-size: 22px;
+      }
+
+      p {
+        font-size: 13px;
+        line-height: 1.85;
+      }
     }
   }
 `

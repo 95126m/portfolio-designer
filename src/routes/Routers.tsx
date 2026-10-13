@@ -4,6 +4,7 @@ import Home from '@/pages/Home'
 import Works from '@/pages/Works'
 import Overview from '@/pages/Overview'
 import About from '@/pages/About'
+import PopupDesign from '@/pages/PopUp'
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     children: [
       { path: '', element: <Home /> },
       { path: 'works', element: <Works /> },
+      { path: 'popup', element: <PopupDesign /> },
       { path: 'overview', element: <Overview /> },
       { path: 'about', element: <About /> },
     ]

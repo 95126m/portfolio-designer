@@ -18,7 +18,50 @@
 
 - 페이지 퍼블리싱 및 기능 구현 : 2025.02.14 - 2025.02.28
 
-## 페이지
+- 코드 유지보수 및 디자인 개선, 반응형 웹 전면 적용 : 2026.10.12 - 2026.10.14
+
+## 페이지 (v2.0) 2026.10.14
+
+기존 v1.0은 PC 환경을 중심으로 제작되어 모바일 환경에서의 사용성과 접근성에 한계가 있었습니다.
+<br />
+실제 기업 면접 과정에서 받은 피드백을 바탕으로 개선의 필요성을 인식하였습니다.
+<br />
+이를 통해 반응형 웹사이트로 전면 리뉴얼하였습니다.
+
+### 1. Home(MO)
+
+![](./src/assets/readme/readme2.0-home.jpg)
+
+### 2. Menu(MO)
+
+![](./src/assets/readme/readme2.0-menu.jpg)
+
+### 3. Works(MO)
+
+![](./src/assets/readme/readme2.0-works.jpg)
+
+### 4. Works(PC & MO)✨
+
+![](./src/assets/readme/readme2.0-popup.jpg)
+
+기존 WORKS 섹션에서 팝업 및 SNS 디자인 작업물을 분리하여, 보다 직관적이고 효율적으로 포트폴리오를 탐색할 수 있도록 새로운 섹션을 구성하였습니다.
+<br />
+다양한 디자인 작업물을 한눈에 확인할 수 있도록 무한 자동 슬라이드 인터랙션을 적용하여 시각적인 흐름과 사용자 경험을 개선하였습니다.
+
+- 이미지 무한 슬라이드 기능
+- 마우스 호버 시, 이미지 일시정지 기능
+
+### 5. Overview(MO)
+
+| About | Carrer |
+|---|---|
+| ![](./src/assets/readme/readme2.0-about.png) | ![](./src/assets/readme/readme2.0-carrer.png) |
+
+| Education | Skills |
+|---|---|
+| ![](./src/assets/readme/readme2.0-education.png) | ![](./src/assets/readme/readme2.0-skills.png) |
+
+## 페이지 (v1.0)
 
 ### 1. Home
 
